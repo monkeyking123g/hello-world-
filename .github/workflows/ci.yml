@@ -19,5 +19,7 @@ jobs:
       run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
     - name: Build the Docker image
       run: docker build -t cicd-pipeline .
+    - name: Push to Tag
+      run: docker tag cicd-pipeline:latest dimon21221/cicd-pipeline:latest
     - name: Push to Dockerhub
       run: docker push dimon21221/cicd-pipeline:latest
