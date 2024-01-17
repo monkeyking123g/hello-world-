@@ -1,0 +1,22 @@
+name: CD Pipeline
+
+on:
+  workflow_run:
+    workflows: ["CI Pipeline"]
+    types:
+      - completed
+    
+jobs:
+
+  build:
+
+    runs-on: self-hosted
+      
+    steps:
+    - name: Docker pull images
+      run: sudo docker pull dimon21221/cicd-pipeline
+    - name: Delete old container
+      run: sudo docker rm -f cicd-pipeline-container || true 
+    - name: Run docker container
+      run: sudo docker run -d -p 3000:3000 --name cicd-pipeline-container dimon21221/cicd-pipeline
+  
