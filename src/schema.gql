@@ -1,0 +1,60 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Post {
+  id: Int!
+  title: String
+  author: Post!
+}
+
+type Author {
+  id: Int!
+  firstName: String
+  lastName: String
+  posts: [Post!]
+}
+
+type Query {
+  findAllAuthor: [Author!]!
+  findAuthorById(id: Float!): Author!
+  findAllPost: [Post!]!
+  findPostById(id: Float!): Post!
+}
+
+type Mutation {
+  createAuthor(createAuthorInput: createUserInput!): Author!
+  updateAuthorById(updateAuthorInput: updateUserInput!): Author!
+  deleteAuthorById(id: Int!): Boolean!
+  createPost(createPostInput: createUpdateInput!): Post!
+  updatePostById(updatePostInput: updatePostInput!): Post!
+  deletePostById(id: Int!): Boolean!
+}
+
+input createUserInput {
+  """Firstname of user"""
+  firstName: String!
+
+  """Surname of user"""
+  lastName: String!
+}
+
+input updateUserInput {
+  """Firstname of user"""
+  firstName: String
+
+  """Surname of user"""
+  lastName: String
+  id: Int!
+}
+
+input createUpdateInput {
+  title: String!
+  authorId: Float
+}
+
+input updatePostInput {
+  title: String
+  authorId: Float
+  id: Int!
+}
